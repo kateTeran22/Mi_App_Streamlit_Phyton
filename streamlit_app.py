@@ -15,7 +15,7 @@ def visualizar_datos():
     archivo_cargado = st.file_uploader("Elige un archivo excel", type="xlsx")
 
     if archivo_cargado is not None:
-        df = pd.ExcelFile(archivo_cargado)
+        df = pd.ExcelFile(archivo_cargado, engine='openpyxl')
         hojasA = df.sheet_names
         hoja_seleccionadaA = st.selectbox("Selecciona una hoja", hojasA)
 
@@ -35,13 +35,13 @@ def graficos_interactivos():
     st.write("Carga un archivo excel para crear gráficos interactivos.")
     archivo_cargado = st.file_uploader("Elige un archivo excel", type="xlsx",key="2")
     if archivo_cargado is not None:
-        df = pd.ExcelFile(archivo_cargado)
+        df = pd.ExcelFile(archivo_cargado,engine='openpyxl')
         # Mostrar lista de hojas disponibles en el archivo
         hojas = df.sheet_names
         hoja_seleccionada = st.selectbox("Selecciona una hoja", hojas)
 
         # Cargar los datos de la hoja seleccionada
-        df = pd.read_excel(archivo_cargado, hoja_seleccionada)
+        df = pd.read_excel(archivo_cargado, hoja_seleccionada, engine='openpyxl')
 
         if df.empty:
             st.write("La hoja seleccionada está vacía o no tiene datos.")
